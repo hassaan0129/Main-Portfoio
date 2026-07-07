@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { PROJECTS } from "@/constants/content";
-import { WORK_CATEGORIES, useWorkStore } from "@/store/useWorkStore";
+import { WORK_CATEGORIES, useWorkStore } from "@/store/WorkStore";
 import { cn } from "@/lib/utils";
 
 export function Work() {

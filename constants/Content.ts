@@ -1,4 +1,4 @@
-import type { WorkCategory } from "@/store/useWorkStore";
+import type { WorkCategory } from "@/store/WorkStore";
 
 export interface Project {
   id: string;
