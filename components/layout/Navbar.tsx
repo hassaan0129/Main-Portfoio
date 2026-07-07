@@ -1,6 +1,4 @@
 "use client";
-
-import { useRef } from "react";
 import { useMagnetic } from "@/hooks/useMagnetic";
 
 const NAV_LINKS = [
