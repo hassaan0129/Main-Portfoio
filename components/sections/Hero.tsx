@@ -126,7 +126,7 @@ export function Hero() {
   }, [loaded]);
 
   return (
-    <section ref={sectionRef} className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[var(--bg-primary)]">
+    <section ref={sectionRef} className="relative flex flex-col justify-center min-h-[100dvh] overflow-hidden bg-[var(--bg-primary)] pt-32 pb-24 lg:pt-0 lg:pb-0">
       {!loaded && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-[var(--bg-primary)]">
           <span className="font-mono text-sm tracking-[0.3em] text-white/70">
@@ -140,11 +140,11 @@ export function Hero() {
 
       {/* Hero Content Column */}
       <div
-        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-center px-6 pt-32 pb-16 sm:px-10 sm:pt-40 lg:flex-row lg:justify-between lg:py-0"
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6 sm:px-10 lg:flex-row lg:justify-between lg:items-center"
         style={{ visibility: loaded ? "visible" : "hidden" }}
       >
-        <div className="max-w-3xl lg:w-3/5 xl:w-2/3">
-          <span className="hero-badge mb-6 inline-flex -translate-y-2 items-center gap-2 rounded-full border border-[var(--highlight)]/30 px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[var(--highlight)] opacity-0 will-change-transform">
+        <div className="flex max-w-3xl flex-col items-center text-center lg:w-3/5 xl:w-2/3 lg:items-start lg:text-left">
+          <span className="hero-badge mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--highlight)]/30 px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[var(--highlight)] opacity-0 will-change-transform">
             <span aria-hidden="true">✦</span>
             AGENz Production — Performance Creative Agency
           </span>
@@ -160,32 +160,32 @@ export function Hero() {
             through AI UGC ads, VSL editing, and motion graphics.
           </p>
 
-          <div className="hero-buttons mt-8 flex flex-col items-start gap-4 opacity-0 scale-95 will-change-transform sm:flex-row sm:items-center">
-            <MagneticButton>Get a Free Creative Audit</MagneticButton>
-            <MagneticButton variant="ghost">See Our Results</MagneticButton>
+          <div className="hero-buttons mt-8 flex w-full flex-col items-center justify-center gap-4 opacity-0 scale-95 will-change-transform sm:w-auto sm:flex-row lg:justify-start">
+            <MagneticButton className="w-full sm:w-auto">Get a Free Creative Audit</MagneticButton>
+            <MagneticButton variant="ghost" className="w-full sm:w-auto">See Our Results</MagneticButton>
           </div>
         </div>
 
-        {/* Floating cards inline on mobile, absolute on desktop */}
-        <div className="relative mt-16 w-full lg:mt-0 lg:w-2/5 xl:w-1/3">
+        {/* Floating cards absolutely positioned on desktop, hidden on mobile for clean UI */}
+        <div className="hidden lg:block relative w-full lg:w-2/5 xl:w-1/3">
           <FloatingTestimonials />
         </div>
       </div>
 
       {/* Client Logo Banner */}
-      <div className="hero-subtext relative mt-16 w-full px-6 opacity-0 will-change-[opacity] sm:px-10 lg:absolute lg:bottom-12 lg:left-0 lg:mt-0 lg:pb-0 pb-12">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-50 grayscale">
+      <div className="hero-subtext relative mt-16 w-full px-6 opacity-0 will-change-[opacity] sm:px-10 lg:absolute lg:bottom-12 lg:left-0 lg:mt-0 lg:pb-0">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 sm:gap-16 opacity-50 grayscale">
           <span className="text-sm font-semibold tracking-widest text-white/80">RIDGE</span>
           <span className="text-sm font-serif italic tracking-wider text-white/80">Glow Skincare</span>
           <span className="text-sm font-bold tracking-[0.2em] text-white/80">NECTAR</span>
-          <span className="hidden text-sm font-medium tracking-wide text-white/80 sm:block">FLOWSTATE</span>
+          <span className="text-sm font-medium tracking-wide text-white/80 sm:block">FLOWSTATE</span>
           <span className="hidden text-sm font-light tracking-[0.3em] text-white/80 sm:block">NOVA AUDIO</span>
         </div>
       </div>
 
       <div 
         ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] font-medium uppercase tracking-[0.3em] text-white/40 opacity-0 will-change-transform"
+        className="hidden lg:block absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] font-medium uppercase tracking-[0.3em] text-white/40 opacity-0 will-change-transform"
       >
         Scroll
       </div>
