@@ -5,52 +5,59 @@ export interface Project {
   title: string;
   client: string;
   category: Exclude<WorkCategory, "All">;
-  thumbnail: string; // placeholder image path
-  videoPreview?: string; // placeholder video path, optional
+  thumbnail: string;
+  videoPreview?: string;
+  metrics: string;
 }
 
 export const PROJECTS: Project[] = [
   {
     id: "p1",
-    title: "Glow Skincare — UGC Sprint",
+    title: "Glow Skincare — Hook Optimization",
     client: "Glow Skincare",
     category: "AI UGC Ads",
     thumbnail: "/work/placeholder-1.jpg",
+    metrics: "Hook Rate: 52% | ROAS: 3.8x",
   },
   {
     id: "p2",
-    title: "Nectar — Funnel VSL",
+    title: "Nectar — Long-form Sales Letter",
     client: "Nectar Supplements",
-    category: "VSL Production",
+    category: "VSL Editing",
     thumbnail: "/work/placeholder-2.jpg",
+    metrics: "CPA: -$12.40 | LTV: +40%",
   },
   {
     id: "p3",
-    title: "Flowstate — Product Walkthrough",
-    client: "Flowstate SaaS",
-    category: "SaaS Animations",
+    title: "Nova Audio — Product Launch",
+    client: "Nova Audio",
+    category: "Motion Graphics",
     thumbnail: "/work/placeholder-3.jpg",
+    metrics: "CTR: 4.1% | ROAS: 4.2x",
   },
   {
     id: "p4",
-    title: "Ridge — Meta Scaling Set",
+    title: "Ridge — AI Variant Testing",
     client: "Ridge Apparel",
-    category: "Meta/TikTok Ads",
+    category: "AI UGC Ads",
     thumbnail: "/work/placeholder-4.jpg",
+    metrics: "Hook Rate: 48% | CPA: -$8.50",
   },
   {
     id: "p5",
-    title: "Nova — Brand Motion System",
-    client: "Nova Audio",
-    category: "Motion Graphics",
+    title: "Flowstate SaaS — Offer Restructure",
+    client: "Flowstate SaaS",
+    category: "VSL Editing",
     thumbnail: "/work/placeholder-5.jpg",
+    metrics: "Conversion: +2.4% | ROAS: 3.1x",
   },
   {
     id: "p6",
-    title: "Peak — TikTok Ad Batch",
+    title: "Peak — Brand Motion Identity",
     client: "Peak Nutrition",
-    category: "Meta/TikTok Ads",
+    category: "Motion Graphics",
     thumbnail: "/work/placeholder-6.jpg",
+    metrics: "CTR: 3.8% | Watch Time: 12s",
   },
 ];
 
@@ -58,75 +65,52 @@ export const SERVICES = [
   {
     title: "AI UGC Ads",
     description:
-      "AI-generated creators, scripted and edited to feel native to the feed — built for hook-rate and thumb-stop speed.",
+      "High-velocity ad variants engineered with AI tools. Scripted and edited for maximum hook rate, built to find your winning creative faster.",
   },
   {
-    title: "VSL Production",
+    title: "VSL Editing",
     description:
-      "Long-form video sales letters structured for retention and conversion, paced for the offer, not for attention alone.",
-  },
-  {
-    title: "SaaS Animations",
-    description:
-      "Product walkthroughs and motion systems that make complex software feel simple in under 30 seconds.",
-  },
-  {
-    title: "Meta/TikTok Ads",
-    description:
-      "Performance-first paid social edits, tested in batches, optimized for CPA — not just watch time.",
+      "Long-form video sales letters structured purely for conversion. We pace the edit for the offer, optimizing drop-off points to drive sales.",
   },
   {
     title: "Motion Graphics",
     description:
-      "Kinetic type, brand systems, and animated logos that carry an identity across every format.",
-  },
-  {
-    title: "Brand Campaigns",
-    description:
-      "Multi-format campaign edits that keep a single creative idea consistent across every placement.",
+      "Kinetic typography, 3D product overlays, and seamless transitions that make complex offers easily digestible and visually premium.",
   },
 ];
 
 export const PROCESS_STEPS = [
   {
-    label: "Discovery",
-    description: "We map the offer, the audience, and what's already converting — before touching a single clip.",
+    label: "Strategy & Scripting",
+    description: "We audit your funnel, map your audience avatars, and script the angles before we ever touch a timeline.",
   },
   {
-    label: "Planning",
-    description: "Scripts, shot lists, and a structural blueprint for pacing, hooks, and CTA placement.",
+    label: "Editing & Iteration",
+    description: "We build the core assets, layer motion graphics, and pace the edit to eliminate friction and maximize watch time.",
   },
   {
-    label: "Editing",
-    description: "Frame-accurate cuts, sound design, and pacing tuned to the platform it's built for.",
-  },
-  {
-    label: "Motion Graphics",
-    description: "Kinetic type, overlays, and brand-consistent motion layered on top of the edit.",
-  },
-  {
-    label: "Delivery",
-    description: "Platform-ready exports, versioned for testing, delivered on schedule — every time.",
+    label: "Scaling & Delivery",
+    description: "We deliver platform-native variants designed for split-testing, giving your media buyers the ammo they need to scale.",
   },
 ];
 
 export const TESTIMONIALS = [
   {
     quote:
-      "Our hook rate doubled in the first batch. This is the first editor who actually understood performance, not just craft.",
+      "Our hook rate doubled in the first batch. AGENZ drove our CPA down by 30% within two weeks of testing their UGC creatives.",
     name: "Sarah Chen",
     role: "Growth Lead, Glow Skincare",
   },
   {
     quote:
-      "We stopped briefing every single edit. They just know what converts for our audience now.",
-    name: "Marcus Webb",
-    role: "Founder, Ridge Apparel",
+      "The VSL restructure was a gamechanger. They cut the fluff, paced the offer perfectly, and we saw a 3.2x ROAS on day one.",
+    name: "Priya Patel",
+    role: "CMO, Nectar Supplements",
   },
   {
     quote:
-      "The VSL restructure alone paid for six months of retainer in the first week.",
-    name: "Priya Patel",
-    role: "CMO, Nectar Supplements",
+      "We stopped briefing them entirely. They just know exactly what converts for our demographic. Pure performance craft.",
+    name: "Marcus Webb",
+    role: "Founder, Ridge Apparel",
   },
 ];

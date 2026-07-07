@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-geist-sans), "Neue Montreal", -apple-system, sans-serif;
+  --font-serif: var(--font-dm-serif), "Playfair Display", serif;
+}
+
 :root {
-  --bg-primary: #050505;
-  --bg-secondary: #101010;
-  --accent: #ffffff;
-  --accent-soft: #a1a1a1;
-  --highlight: #6e7bff; /* electric blue-purple, used sparingly */
+  --bg-primary: #0d0c0a; /* dark charcoal, not pure black */
+  --bg-secondary: #17150f;
+  --accent: #f5f1e8; /* off-white / cream */
+  --accent-soft: #a8a296;
+  --highlight: #c9a24b; /* muted gold */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -38,9 +43,9 @@ html.lenis body {
 
 /* Editorial type scale */
 .text-hero {
-  font-size: clamp(2.75rem, 8vw, 8rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   font-weight: 600;
 }
 
@@ -66,28 +71,9 @@ html.lenis body {
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
+  transform: translateZ(0);
 }
 
-/* Custom cursor dot — hidden on touch devices */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  pointer-events: none;
-  z-index: 100;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s var(--ease-premium), height 0.2s var(--ease-premium), background 0.2s;
-}
-
-@media (hover: none) {
-  .cursor-dot {
-    display: none;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *,

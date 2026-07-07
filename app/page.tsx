@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { Agitation } from "@/components/sections/Agitation";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
 import { Work } from "@/components/sections/Work";
@@ -10,10 +11,11 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <About />
-      <Services />
+      <Agitation />
       <Work />
+      <Services />
       <Process />
+      <About />
       <SocialProof />
       <Contact />
       <Footer />

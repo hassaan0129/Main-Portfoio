@@ -8,6 +8,7 @@ import { useGSAP } from "@/hooks/useGSAP";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { contactSchema, type ContactFormValues } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/animations/Reveal";
 
 const BUDGETS = ["$2k–5k/mo", "$5k–10k/mo", "$10k+/mo"];
 
@@ -24,15 +25,7 @@ export function Contact() {
   } = useForm<ContactFormValues>({ resolver: zodResolver(contactSchema) });
 
   useGSAP(() => {
-    if (prefersReducedMotion() || !sectionRef.current) return;
-    gsap.from(".contact-fade", {
-      opacity: 0,
-      y: 24,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-    });
+    // .contact-fade animation is now handled by the Reveal wrapper
   }, []);
 
   const onSubmit = async (values: ContactFormValues) => {
@@ -58,113 +51,115 @@ export function Contact() {
       className="relative bg-[var(--bg-secondary)] px-6 py-32"
       aria-labelledby="contact-heading"
     >
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="contact-fade mb-4 text-xs uppercase tracking-[0.35em] text-white/50">
-          Start a project
-        </p>
-        <h2
-          id="contact-heading"
-          className="contact-fade mb-16 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl"
-        >
-          Let&apos;s create something extraordinary.
-        </h2>
-
-        {submitted ? (
-          <div
-            ref={successRef}
-            className="contact-fade rounded-2xl border border-white/10 bg-white/5 p-12"
-            role="status"
+      <Reveal selector=".contact-fade">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="contact-fade mb-4 text-xs uppercase tracking-[0.35em] text-white/50">
+            Start a project
+          </p>
+          <h2
+            id="contact-heading"
+            className="contact-fade mb-16 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl"
           >
-            <p className="text-xl font-medium text-white">
-              Message sent — we&apos;ll reply within 24 hours.
-            </p>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="contact-fade space-y-5 text-left"
-            noValidate
-          >
-            <div>
-              <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-wide text-white/50">
-                Name
-              </label>
-              <input
-                id="name"
-                {...register("name")}
-                className="w-full rounded-lg border border-white/15 bg-transparent px-4 py-3 text-white outline-none transition-colors focus:border-white/50"
-                aria-invalid={!!errors.name}
-              />
-              {errors.name && (
-                <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>
-              )}
-            </div>
+            Ready to drop your CPA and scale your creatives?
+          </h2>
 
-            <div>
-              <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-wide text-white/50">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                {...register("email")}
-                className="w-full rounded-lg border border-white/15 bg-transparent px-4 py-3 text-white outline-none transition-colors focus:border-white/50"
-                aria-invalid={!!errors.email}
-              />
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-400">{errors.email.message}</p>
-              )}
+          {submitted ? (
+            <div
+              ref={successRef}
+              className="contact-fade rounded-2xl border border-white/10 bg-white/5 p-12"
+              role="status"
+            >
+              <p className="text-xl font-medium text-white">
+                Message sent — we&apos;ll reply within 24 hours.
+              </p>
             </div>
-
-            <div>
-              <label className="mb-2 block text-xs uppercase tracking-wide text-white/50">
-                Monthly budget
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {BUDGETS.map((budget) => (
-                  <label
-                    key={budget}
-                    className={cn(
-                      "cursor-pointer rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition-colors has-[:checked]:border-white has-[:checked]:bg-white has-[:checked]:text-black"
-                    )}
-                  >
-                    <input
-                      type="radio"
-                      value={budget}
-                      {...register("budget")}
-                      className="sr-only"
-                    />
-                    {budget}
-                  </label>
-                ))}
+          ) : (
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="contact-fade space-y-5 text-left"
+              noValidate
+            >
+              <div>
+                <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-wide text-white/50">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  {...register("name")}
+                  className="w-full rounded-lg border border-white/15 bg-transparent px-4 py-3 text-white outline-none transition-colors focus:border-white/50"
+                  aria-invalid={!!errors.name}
+                />
+                {errors.name && (
+                  <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>
+                )}
               </div>
-              {errors.budget && (
-                <p className="mt-1 text-xs text-red-400">{errors.budget.message}</p>
-              )}
-            </div>
 
-            <div>
-              <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-wide text-white/50">
-                Project details
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                {...register("message")}
-                className="w-full rounded-lg border border-white/15 bg-transparent px-4 py-3 text-white outline-none transition-colors focus:border-white/50"
-                aria-invalid={!!errors.message}
-              />
-              {errors.message && (
-                <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
-              )}
-            </div>
+              <div>
+                <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-wide text-white/50">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  className="w-full rounded-lg border border-white/15 bg-transparent px-4 py-3 text-white outline-none transition-colors focus:border-white/50"
+                  aria-invalid={!!errors.email}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-xs text-red-400">{errors.email.message}</p>
+                )}
+              </div>
 
-            <MagneticButton type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
-              {isSubmitting ? "Sending…" : "Send message"}
-            </MagneticButton>
-          </form>
-        )}
-      </div>
+              <div>
+                <label className="mb-2 block text-xs uppercase tracking-wide text-white/50">
+                  Monthly budget
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {BUDGETS.map((budget) => (
+                    <label
+                      key={budget}
+                      className={cn(
+                        "cursor-pointer rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition-colors has-[:checked]:border-white has-[:checked]:bg-white has-[:checked]:text-black"
+                      )}
+                    >
+                      <input
+                        type="radio"
+                        value={budget}
+                        {...register("budget")}
+                        className="sr-only"
+                      />
+                      {budget}
+                    </label>
+                  ))}
+                </div>
+                {errors.budget && (
+                  <p className="mt-1 text-xs text-red-400">{errors.budget.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-wide text-white/50">
+                  Project details
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  {...register("message")}
+                  className="w-full rounded-lg border border-white/15 bg-transparent px-4 py-3 text-white outline-none transition-colors focus:border-white/50"
+                  aria-invalid={!!errors.message}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
+                )}
+              </div>
+
+              <MagneticButton type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
+                {isSubmitting ? "Sending…" : "Start Your Project Today"}
+              </MagneticButton>
+            </form>
+          )}
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -177,18 +172,18 @@ export function Footer() {
           href="#"
           className="group text-lg font-semibold tracking-tight text-white transition-colors"
         >
-          HAMZA
+          AGENZ PRODUCTION
           <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-[var(--highlight)] align-middle opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </a>
         <p className="text-xs text-white/40">
-          © {new Date().getFullYear()} Hamza. All rights reserved.
+          © {new Date().getFullYear()} AGENZ PRODUCTION. All rights reserved.
         </p>
-        <div className="flex gap-6 text-xs text-white/40">
-          <a href="#" className="transition-colors hover:text-white">Instagram</a>
-          <a href="#" className="transition-colors hover:text-white">X</a>
-          <a href="mailto:hello@hamza.agency" className="transition-colors hover:text-white">
-            Email
-          </a>
+        <div className="flex flex-wrap justify-center gap-6 text-xs text-white/40">
+          <a href="#services" className="transition-colors hover:text-white">Services</a>
+          <a href="#process" className="transition-colors hover:text-white">Process</a>
+          <a href="#about" className="transition-colors hover:text-white">About</a>
+          <a href="https://linkedin.com/in/agenz-productions-166733363/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">LinkedIn</a>
+          <a href="mailto:agenz.socials@gmail.com" className="transition-colors hover:text-white">Email</a>
         </div>
       </div>
     </footer>

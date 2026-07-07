@@ -29,7 +29,21 @@ export function useLenis() {
     });
     gsap.ticker.lagSmoothing(0);
 
+    const handleClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a[href^="#"]');
+      if (!target) return;
+      
+      const href = target.getAttribute("href");
+      if (href && href !== "#") {
+        e.preventDefault();
+        lenis.scrollTo(href, { offset: -32, duration: 1.4 });
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+
     return () => {
+      document.removeEventListener("click", handleClick);
       lenis.destroy();
       lenisRef.current = null;
     };

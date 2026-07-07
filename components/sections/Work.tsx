@@ -6,6 +6,7 @@ import { useGSAP } from "@/hooks/useGSAP";
 import { PROJECTS } from "@/constants/content";
 import { WORK_CATEGORIES, useWorkStore } from "@/store/WorkStore";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/animations/Reveal";
 
 export function Work() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -19,18 +20,12 @@ export function Work() {
 
   useGSAP(() => {
     if (prefersReducedMotion() || !sectionRef.current) return;
-    gsap.from(".work-card", {
-      opacity: 0,
-      y: 30,
-      duration: 0.7,
-      stagger: 0.06,
-      ease: "power3.out",
-      scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-    });
+    // .work-card animation is now handled by the Reveal wrapper
   }, [activeCategory]);
 
   return (
     <section
+      id="work"
       ref={sectionRef}
       className="bg-[var(--bg-primary)] px-6 py-32"
       aria-labelledby="work-heading"
@@ -73,48 +68,91 @@ export function Work() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleProjects.map((project) => (
-            <button
-              key={project.id}
-              className="work-card group relative aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--bg-secondary)] text-left"
-              onMouseEnter={() => setHoveredId(project.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              aria-label={`View project: ${project.title}`}
-            >
-              {/* Placeholder thumbnail - swap with next/image once real assets exist */}
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-white/5 to-black/40 transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url(${project.thumbnail})`, backgroundSize: "cover" }}
-              />
+        <Reveal selector=".work-card" dependencies={[activeCategory]}>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
+            {visibleProjects.map((project, i) => {
+              // Create an asymmetrical layout pattern that repeats every 6 items
+              const pattern = i % 6;
+              let layoutClasses = "";
+              
+              switch (pattern) {
+                case 0:
+                  layoutClasses = "md:col-span-8 aspect-[16/9] md:aspect-auto md:h-[600px]";
+                  break;
+                case 1:
+                  layoutClasses = "md:col-span-4 aspect-[4/5] md:aspect-auto md:h-[600px]";
+                  break;
+                case 2:
+                  layoutClasses = "md:col-span-4 aspect-[4/5] md:aspect-auto md:h-[500px]";
+                  break;
+                case 3:
+                  layoutClasses = "md:col-span-8 aspect-[16/9] md:aspect-auto md:h-[500px]";
+                  break;
+                case 4:
+                  layoutClasses = "md:col-span-6 aspect-[4/5] md:aspect-auto md:h-[550px]";
+                  break;
+                case 5:
+                  layoutClasses = "md:col-span-6 aspect-[4/5] md:aspect-auto md:h-[550px]";
+                  break;
+                default:
+                  layoutClasses = "md:col-span-4 aspect-[4/5]";
+              }
 
-              {project.videoPreview && (
-                <video
+              return (
+                <button
+                  key={project.id}
                   className={cn(
-                    "absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500",
-                    hoveredId === project.id && "opacity-100"
+                    "work-card group relative overflow-hidden rounded-2xl bg-[var(--bg-secondary)] text-left transition-all duration-500",
+                    layoutClasses,
+                    hoveredId && hoveredId !== project.id ? "scale-[0.98] opacity-40 blur-[2px] grayscale-[50%]" : "scale-100 opacity-100 blur-none grayscale-0"
                   )}
-                  src={project.videoPreview}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay={hoveredId === project.id}
+                  onMouseEnter={() => setHoveredId(project.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  aria-label={`View project: ${project.title}`}
+                >
+                {/* Placeholder thumbnail - swap with next/image once real assets exist */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-br from-white/5 to-black/40 transition-transform duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${project.thumbnail})`, backgroundSize: "cover" }}
                 />
-              )}
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                {project.videoPreview && (
+                  <video
+                    className={cn(
+                      "absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500",
+                      hoveredId === project.id && "opacity-100"
+                    )}
+                    src={project.videoPreview}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    autoPlay={hoveredId === project.id}
+                  />
+                )}
 
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <p className="mb-1 text-xs uppercase tracking-widest text-white/50">
-                  {project.category}
-                </p>
-                <h3 className="text-lg font-medium text-white">
-                  {project.title}
-                </h3>
-              </div>
-            </button>
-          ))}
-        </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+                <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col items-start">
+                  <p className="mb-1 text-xs uppercase tracking-widest text-white/50">
+                    {project.category}
+                  </p>
+                  <h3 className="mb-3 text-lg font-medium text-white">
+                    {project.title}
+                  </h3>
+                  
+                  {project.metrics && (
+                    <div className="inline-flex items-center gap-2 rounded-full border border-[var(--highlight)]/20 bg-[var(--highlight)]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--highlight)] backdrop-blur-sm">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--highlight)]" aria-hidden="true" />
+                      {project.metrics}
+                    </div>
+                  )}
+                </div>
+              </button>
+              );
+            })}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
