@@ -67,19 +67,21 @@ export function SocialProof() {
 
       {/* Centered testimonial track */}
       <Reveal selector=".testimonial-card">
-        <div className="testimonial-track flex flex-nowrap justify-start lg:justify-center gap-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {TESTIMONIALS.map((t) => (
-            <blockquote
-              key={t.name}
-              className="testimonial-card w-[320px] flex-shrink-0 rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md sm:w-[380px] text-left"
-            >
-              <p className="text-body mb-6">&ldquo;{t.quote}&rdquo;</p>
-              <footer>
-                <p className="text-sm font-medium text-white">{t.name}</p>
-                <p className="text-xs text-white/40">{t.role}</p>
-              </footer>
-            </blockquote>
-          ))}
+        <div className="testimonial-track w-full overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mx-auto flex w-max gap-6">
+            {TESTIMONIALS.map((t) => (
+              <blockquote
+                key={t.name}
+                className="testimonial-card w-[320px] flex-shrink-0 rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md sm:w-[380px] text-left"
+              >
+                <p className="text-body mb-6">&ldquo;{t.quote}&rdquo;</p>
+                <footer>
+                  <p className="text-sm font-medium text-white">{t.name}</p>
+                  <p className="text-xs text-white/40">{t.role}</p>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
         </div>
       </Reveal>
     </section>
