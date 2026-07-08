@@ -176,9 +176,12 @@ export function Hero() {
             </MagneticButton>
           </div>
         </div>
+      </div>
 
-        {/* Floating cards absolutely positioned on desktop, hidden on mobile for clean UI */}
-        <div className="hidden lg:block relative w-full lg:w-2/5 xl:w-1/3">
+      {/* Floating cards absolutely positioned on desktop, hidden on mobile for clean UI */}
+      {/* Moved outside the relative inner wrapper so top percentages resolve against full viewport height */}
+      <div className="hidden lg:block absolute inset-0 z-10 pointer-events-none" style={{ visibility: loaded ? "visible" : "hidden" }}>
+        <div className="mx-auto relative w-full max-w-7xl h-full">
           <FloatingTestimonials />
         </div>
       </div>

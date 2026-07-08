@@ -14,12 +14,12 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Hamza — High-Performance Video Editing for Digital Commerce",
+  title: "AGENz — High-Performance Video Editing for Digital Commerce",
   description:
-    "Premium video editing agency specializing in AI UGC ads, VSLs, Meta/TikTok campaigns, SaaS animation, and motion graphics built to convert.",
-  metadataBase: new URL("https://hamza.agency"),
+    "Performance creatives engineered to help DTC brands scale through AI UGC ads, VSL editing, and motion graphics.",
+  metadataBase: new URL("https://agenz.agency"),
   openGraph: {
-    title: "Hamza — Editing That Converts",
+    title: "AGENz — Editing That Converts",
     description:
       "High-performance video editing for AI UGC ads, VSLs, and paid social campaigns.",
     type: "website",
