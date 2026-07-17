@@ -5,16 +5,13 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [isTouch, setIsTouch] = useState(true);
+  const [isTouch] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return window.matchMedia("(pointer: coarse)").matches;
+  });
 
   useEffect(() => {
-    // Detect touch device
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      return;
-    }
-    setIsTouch(false);
-
-    if (prefersReducedMotion() || !cursorRef.current) return;
+    if (isTouch || prefersReducedMotion() || !cursorRef.current) return;
 
     // Use GSAP quickTo for high-performance mouse tracking
     const xTo = gsap.quickTo(cursorRef.current, "x", { duration: 0.15, ease: "power4.out" });
@@ -57,7 +54,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseover", onMouseOver);
       document.removeEventListener("mouseout", onMouseOut);
     };
-  }, []);
+  }, [isTouch]);
 
   if (isTouch) return null;
 

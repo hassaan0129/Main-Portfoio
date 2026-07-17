@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { prefersReducedMotion } from "@/lib/gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { PROJECTS } from "@/constants/content";
 import { WORK_CATEGORIES, useWorkStore } from "@/store/WorkStore";
@@ -41,8 +41,11 @@ export function Work() {
               id="work-heading"
               className="text-4xl font-semibold tracking-tight text-white sm:text-5xl"
             >
-              Built to convert, not just impress.
+              Selected agency production work.
             </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/50">
+              Selected work produced during previous agency experience. Brand names and campaign details are withheld for confidentiality.
+            </p>
           </div>
 
           <div
@@ -152,18 +155,23 @@ export function Work() {
 
                       <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col items-start pointer-events-none">
                         <p className="mb-1 text-xs uppercase tracking-widest text-white/50">
-                          {project.category}
+                          {project.format} / {project.industry}
                         </p>
                         <h3 className="mb-3 text-lg font-medium text-white">
                           {project.title}
                         </h3>
-                        
-                        {project.metrics && (
-                          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--highlight)]/20 bg-[var(--highlight)]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--highlight)] backdrop-blur-sm">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--highlight)]" aria-hidden="true" />
-                            {project.metrics}
-                          </div>
-                        )}
+
+                        <div className="grid gap-1 text-xs leading-relaxed text-white/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <p>
+                            <span className="text-white/85">Work:</span> {project.workCompleted}
+                          </p>
+                          <p>
+                            <span className="text-white/85">Approach:</span> {project.approach}
+                          </p>
+                          <p>
+                            <span className="text-white/85">Deliverables:</span> {project.deliverables}
+                          </p>
+                        </div>
                       </div>
                     </>
                   )}

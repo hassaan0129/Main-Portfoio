@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { Reveal } from "@/components/animations/Reveal";
-import { Tooltip } from "@/components/ui/Tooltip";
 
 export function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -12,7 +11,6 @@ export function About() {
 
   useGSAP(() => {
     if (prefersReducedMotion() || !sectionRef.current) return;
-    // .about-line animation is now handled by the Reveal wrapper
 
     if (imageRef.current) {
       gsap.to(imageRef.current, {
@@ -38,23 +36,22 @@ export function About() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <Reveal selector=".about-line">
           <p className="about-line mb-4 text-xs uppercase tracking-[0.35em] text-white/50">
-            The agency
+            The team
           </p>
           <h2
             id="about-heading"
             className="about-line mb-8 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl"
           >
-            We treat every edit as a <Tooltip content="Optimized for ROI">growth lever</Tooltip>, not a deliverable.
+            A focused production team for agency creative output.
           </h2>
           <p className="about-line text-body max-w-md">
-            AGENZ PRODUCTION is built for brands that measure creative by CPA, not
-            compliments. Every cut, caption, and pattern-interrupt is chosen
-            because it moves a number — hook rate, hold rate, conversion —
-            not because it looks good in a reel.
+            AGENz is a focused creative production team helping performance agencies deliver more ad creatives without expanding their internal editing team.
           </p>
           <p className="about-line text-body mt-4 max-w-md">
-            No junior editors, no generic templates. Just a small team that
-            treats your ad account like it's their own.
+            Hassaan manages client communication, creative planning, and project coordination. Rehan leads editing and production.
+          </p>
+          <p className="about-line text-body mt-4 max-w-md">
+            Our experience comes from producing real ad creatives within an agency environment. We are now bringing that production experience directly to selected agency partners.
           </p>
         </Reveal>
 

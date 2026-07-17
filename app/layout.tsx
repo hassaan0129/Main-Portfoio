@@ -14,14 +14,14 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "AGENz — High-Performance Video Editing for Digital Commerce",
+  title: "AGENz Productions | White-Label Ad Creative Production",
   description:
-    "Performance creatives engineered to help DTC brands scale through AI UGC ads, VSL editing, and motion graphics.",
+    "AI UGC ads, VSL editing, motion graphics, and AI creative production for performance marketing agencies.",
   metadataBase: new URL("https://agenz.agency"),
   openGraph: {
-    title: "AGENz — Editing That Converts",
+    title: "AGENz Productions | White-Label Ad Creative Production",
     description:
-      "High-performance video editing for AI UGC ads, VSLs, and paid social campaigns.",
+      "AI UGC ads, VSL editing, motion graphics, and AI creative production for performance marketing agencies.",
     type: "website",
   },
 };

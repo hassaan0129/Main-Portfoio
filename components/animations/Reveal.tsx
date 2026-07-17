@@ -13,7 +13,7 @@ interface RevealProps {
   y?: number;
   duration?: number;
   stagger?: number;
-  dependencies?: any[];
+  dependencies?: unknown[];
 }
 
 export function Reveal({

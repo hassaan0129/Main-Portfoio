@@ -55,6 +55,25 @@ html.lenis body {
   color: var(--accent-soft);
 }
 
+.form-field {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: transparent;
+  padding: 0.75rem 1rem;
+  color: white;
+  outline: none;
+  transition: border-color 300ms ease;
+}
+
+.form-field:focus {
+  border-color: rgb(255 255 255 / 0.5);
+}
+
+.form-field::placeholder {
+  color: rgb(255 255 255 / 0.3);
+}
+
 /* Split-type: each char/word starts hidden; GSAP reveals them */
 .split-char,
 .split-word,

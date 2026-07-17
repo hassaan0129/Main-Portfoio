@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { prefersReducedMotion } from "@/lib/gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { SERVICES } from "@/constants/content";
 import { Reveal } from "@/components/animations/Reveal";
@@ -23,13 +23,13 @@ export function Services() {
     >
       <div className="mx-auto max-w-6xl">
         <p className="mb-4 text-xs uppercase tracking-[0.35em] text-[var(--highlight)]">
-          Core Offerings
+          Agency Production Services
         </p>
         <h2
           id="services-heading"
           className="mb-16 max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          Specialized in performance creative.
+          Production support for performance teams.
         </h2>
 
         <Reveal selector=".service-card">
@@ -50,6 +50,10 @@ export function Services() {
             ))}
           </div>
         </Reveal>
+
+        <p className="mt-8 max-w-3xl text-sm leading-relaxed text-white/45">
+          AGENz focuses on creative production, editing, scripting, and white-label delivery. Media buying and ad account management are not included unless separately agreed for a specific project.
+        </p>
       </div>
     </section>
   );

@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { useGSAP } from "@/hooks/useGSAP";
-import { PROCESS_STEPS } from "@/constants/content";
+import { PROCESS_STEPS, TRIAL_DELIVERABLES } from "@/constants/content";
 import { Reveal } from "@/components/animations/Reveal";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export function Process() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -42,14 +43,37 @@ export function Process() {
     >
       <div className="mx-auto max-w-6xl">
         <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/50 text-center">
-          How it works
+          Paid Creative Trial
         </p>
         <h2
           id="process-heading"
-          className="mb-20 text-center text-4xl font-semibold tracking-tight text-white sm:text-5xl"
+          className="mx-auto mb-5 max-w-3xl text-center text-4xl font-semibold tracking-tight text-white sm:text-5xl"
         >
-          Three steps to scale.
+          Start With a Low-Risk Creative Trial
         </h2>
+        <p className="text-body mx-auto mb-10 max-w-2xl text-center">
+          Test our workflow with one focused ad project before committing to ongoing production.
+        </p>
+
+        <Reveal selector=".trial-item">
+          <div className="mx-auto mb-14 grid max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {TRIAL_DELIVERABLES.map((item) => (
+              <div
+                key={item}
+                className="trial-item rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 text-sm font-medium text-white"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mb-20 flex flex-col items-center justify-center gap-4 text-center sm:flex-row">
+          <span className="rounded-full border border-[var(--highlight)]/25 bg-[var(--highlight)]/10 px-5 py-3 text-sm font-semibold text-[var(--highlight)]">
+            Request Introductory Pricing
+          </span>
+          <MagneticButton href="#contact">Discuss a Trial Project</MagneticButton>
+        </div>
 
         <div className="relative pt-12">
           {/* Horizontal Line (Desktop) */}
